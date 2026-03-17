@@ -18,3 +18,6 @@ ETL-пайплайн для сбора данных о погоде через A
 - Текущая погода и прогноз на 3 дня
 - Автоматическая загрузка в PostgreSQL
 - Интерактивный дашборд в Redash
+
+## Пример дашборда:
+<img width="1912" height="851" alt="image" src="https://github.com/user-attachments/assets/ac31defc-3380-4a8c-828e-b95b6f68d2bc" />
