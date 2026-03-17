@@ -20,5 +20,6 @@ ETL-пайплайн для сбора данных о погоде через A
 - Интерактивный дашборд в Redash
 
 ## Пример дашборда:
-<img width="1905" height="788" alt="image" src="https://github.com/user-attachments/assets/08cbb069-7388-4045-a4d7-7c0712dfd459" />
+<img width="1905" height="795" alt="image" src="https://github.com/user-attachments/assets/184eb3d9-8dab-4afe-9cfd-d52658e24a57" />
+
 
