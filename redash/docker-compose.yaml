@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: redash
+      POSTGRES_PASSWORD: redash
+      POSTGRES_DB: redash
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+
+  server:
+    image: redash/redash:latest
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      PYTHONUNBUFFERED: 0
+      REDASH_LOG_LEVEL: INFO
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_DATABASE_URL: postgresql://redash:redash@postgres/redash
+      REDASH_COOKIE_SECRET: veryverysecret
+      REDASH_SECRET_KEY: veryverysecret
+    ports:
+      - "5000:5000"
+    command: server
+    restart: unless-stopped
+
+  scheduler:
+    image: redash/redash:latest
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      PYTHONUNBUFFERED: 0
+      REDASH_LOG_LEVEL: INFO
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_DATABASE_URL: postgresql://redash:redash@postgres/redash
+      REDASH_COOKIE_SECRET: veryverysecret
+      REDASH_SECRET_KEY: veryverysecret
+    command: scheduler
+    restart: unless-stopped
+
+  worker:
+    image: redash/redash:latest
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      PYTHONUNBUFFERED: 0
+      REDASH_LOG_LEVEL: INFO
+      REDASH_REDIS_URL: redis://redis:6379/0
+      REDASH_DATABASE_URL: postgresql://redash:redash@postgres/redash
+      REDASH_COOKIE_SECRET: veryverysecret
+      REDASH_SECRET_KEY: veryverysecret
+    command: worker
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
